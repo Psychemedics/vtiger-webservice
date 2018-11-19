@@ -1,0 +1,20 @@
+{
+    "name": "psychemedics/vtiger-webservice",
+    "description": "Pacote de comunicação com o webservice do Vtiger",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sergio Hess",
+            "email": "sergio.hess@psychemedics.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VtigerWS\\": "src/"
+        }
+    }
+}
