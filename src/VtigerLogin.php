@@ -15,9 +15,9 @@ abstract class VtigerLogin
 
     private $tokenChallenge;
 
-    private $tokenSession;
+    protected $tokenSession;
 
-    private $urlBase;
+    protected $urlBase;
 
     private $usuario;
 
@@ -45,14 +45,7 @@ abstract class VtigerLogin
 
         $retorno = ExecutaCURL::get($this->urlBase . '/webservice.php?operation=getchallenge&username=' . $this->usuario);
 
-        if (!$retorno['success']) {
-
-            throw new VtigerWSException('Erro não mapeado ao gerar o token challange', 500);
-        }
-
-        $data = json_decode($retorno['data']);
-
-        $this->trataRetorno($data);
+        $data = RetornoVtiger::valida($retorno);
 
         try {
 
@@ -74,9 +67,7 @@ abstract class VtigerLogin
 
         $retorno = ExecutaCURL::post($this->urlBase . '/webservice.php', $dados);
 
-        $data = json_decode($retorno['data']);
-
-        $this->trataRetorno($data);
+        $data = RetornoVtiger::valida($retorno);
 
         try {
 

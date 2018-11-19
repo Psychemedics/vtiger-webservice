@@ -7,17 +7,19 @@ use PHPUnit\Framework\TestCase;
 class PsyVtigerTest extends TestCase
 {
 
-    public function testGetTokenSession()
+    public function testGetAccountByID()
     {
 
         $argumentos = [
-            'https://crm.exametoxicologico.com.br',
-            'adminpsy',
-            'lZm9M6uubiNRkspv',
+            'https://localhost',
+            'user',
+            'secret',
         ];
 
-        $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\VtigerLogin', $argumentos);
+        $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\PsyVtiger', $argumentos);
 
-        $this->assertRegExp('/[a-zA-Z]/', $classVtigerLogin->getTokenSession());
+        $accaount = $classVtigerLogin->getAccountByID('11x404');
+
+        $this->assertObjectHasAttribute('account_no', $accaount);
     }
 }
