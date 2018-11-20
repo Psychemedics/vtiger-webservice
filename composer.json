@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "psychemedics/gerador-response": "dev-master"
+        "psychemedics/gerador-response": ">=2.0"
     },
     "autoload": {
         "psr-4": {
