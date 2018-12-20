@@ -25,4 +25,18 @@ class PsyVtiger extends VtigerLogin
 
         return $data->result[0];
     }
+
+    public function createAccount($objectJson, $moduleName)
+    {
+        $params = array("sessionName" => $this->tokenSession, "operation" => 'create', "element" => $objectJson, "elementType" => $moduleName);
+        $url = $this->urlBase . '/webservice.php';
+
+        $retorno = ExecutaCURL::post($url, $params);
+
+        $data = RetornoVtiger::valida($retorno);
+
+        $savedObject = $data->result;
+
+        return $savedObject->id;
+    }
 }
