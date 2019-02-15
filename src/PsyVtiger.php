@@ -23,7 +23,7 @@ class PsyVtiger extends VtigerLogin
 
         $data = RetornoVtiger::valida($retorno);
 
-        return $data->result[0];
+        return $data->result[0] ?? [];
     }
 
     public function getAccountByKeyValue($key, $value) {
@@ -36,7 +36,7 @@ class PsyVtiger extends VtigerLogin
 
         $data = RetornoVtiger::valida($retorno);
 
-        return $data->result[0];
+        return $data->result[0] ?? [];
     }
 
     public function createAccount(array $array, string $moduleName)
