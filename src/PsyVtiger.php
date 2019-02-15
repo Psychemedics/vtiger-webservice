@@ -6,10 +6,10 @@ namespace VtigerWS;
 class PsyVtiger extends VtigerLogin
 {
 
-    public function __construct(string $urlBase, string $usuario, string $key)
+    public function __construct(string $urlBase, string $usuario, string $key, string $idUsuario = "")
     {
 
-        parent::__construct($urlBase, $usuario, $key);
+        parent::__construct($urlBase, $usuario, $key, $idUsuario);
     }
 
     public function getAccountByID($id)
@@ -24,5 +24,23 @@ class PsyVtiger extends VtigerLogin
         $data = RetornoVtiger::valida($retorno);
 
         return $data->result[0];
+    }
+
+    public function createAccount(array $array, string $moduleName)
+    {
+        $array['assigned_user_id'] = $this->userId;
+
+        $objectJson = json_encode($array);
+
+        $params = array("sessionName" => $this->tokenSession, "operation" => 'create', "element" => $objectJson, "elementType" => $moduleName);
+        $url = $this->urlBase . '/webservice.php';
+
+        $retorno = ExecutaCURL::post($url, $params);
+
+        $data = RetornoVtiger::valida($retorno);
+
+        $savedObject = $data->result;
+
+        return $savedObject->id;
     }
 }
