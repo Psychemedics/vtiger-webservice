@@ -25,3 +25,18 @@ public function getDados(Request $request)
     ...
 } 
 ```
+
+### Create Account:
+```
+use VtigerWS\PsyVtiger;
+
+public function getDados(Request $request)
+{
+
+    $vtiger = new PsyVtiger('https://meudominio.com', 'usuario', 'chave', 'id');
+    $insertArray = [];
+    $account = $vtiger->createAccount($insertArray, 'moduleName');
+
+    ...
+} 
+```
