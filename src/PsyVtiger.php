@@ -26,6 +26,19 @@ class PsyVtiger extends VtigerLogin
         return $data->result[0];
     }
 
+    public function getAccountByKeyValue($key, $value) {
+
+        $query = "SELECT * FROM Accounts WHERE {$key} = {$value};";
+
+        $url = $this->urlBase . '/webservice.php?operation=query&sessionName=' . $this->tokenSession . '&query=' . urlencode($query);
+
+        $retorno = ExecutaCURL::get($url);
+
+        $data = RetornoVtiger::valida($retorno);
+
+        return $data->result[0];
+    }
+
     public function createAccount(array $array, string $moduleName)
     {
         $array['assigned_user_id'] = $this->userId;

@@ -23,6 +23,23 @@ class PsyVtigerTest extends TestCase
         $this->assertObjectHasAttribute('account_no', $accaount);
     }
 
+    public function testGetAccountByKeyValue()
+    {
+
+        $argumentos = [
+            'https://localhost',
+            'user',
+            'secret',
+        ];
+
+        $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\PsyVtiger', $argumentos);
+
+        $accaount = $classVtigerLogin->getAccountByKeyValue('key', 'value');
+
+        $this->assertObjectHasAttribute('account_no', $accaount);
+    }
+
+
     public function testCreateAccount()
     {
         $argumentos = [
