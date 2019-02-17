@@ -18,9 +18,9 @@ class PsyVtigerTest extends TestCase
 
         $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\PsyVtiger', $argumentos);
 
-        $accaount = $classVtigerLogin->getAccountByID('11x404');
+        $account = $classVtigerLogin->getAccountByID('11x404');
 
-        $this->assertObjectHasAttribute('account_no', $accaount);
+        $this->assertObjectHasAttribute('account_no', $account[0]);
     }
 
     public function testGetAccountByKeyValue()
@@ -34,9 +34,9 @@ class PsyVtigerTest extends TestCase
 
         $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\PsyVtiger', $argumentos);
 
-        $accaount = $classVtigerLogin->getAccountByKeyValue('key', 'value');
+        $account = $classVtigerLogin->getAccountByKeyValue('key', 'value');
 
-        $this->assertObjectHasAttribute('account_no', $accaount);
+        $this->assertObjectHasAttribute('account_no', $account[0]);
     }
 
 
@@ -53,7 +53,24 @@ class PsyVtigerTest extends TestCase
 
         $array = [];
 
-        $id = $classVtigerLogin->createAccount($array, 'Accounts');
+        $id = $classVtigerLogin->create($array, 'Accounts');
+        $this->assertTrue(!empty($id));
+    }
+
+    public function testUpdateAccount()
+    {
+        $argumentos = [
+            'https://localhost',
+            'user',
+            'secret',
+            'id'
+        ];
+
+        $classVtigerLogin = $this->getMockForAbstractClass('VtigerWS\PsyVtiger', $argumentos);
+
+        $array = [];
+
+        $id = $classVtigerLogin->update($array);
         $this->assertTrue(!empty($id));
     }
 }

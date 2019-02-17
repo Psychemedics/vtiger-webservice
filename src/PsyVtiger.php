@@ -39,7 +39,7 @@ class PsyVtiger extends VtigerLogin
         return $data->result;
     }
 
-    public function createAccount(array $array, string $moduleName)
+    public function create(array $array, string $moduleName)
     {
         $array['assigned_user_id'] = $this->userId;
 
@@ -54,11 +54,13 @@ class PsyVtiger extends VtigerLogin
 
         $savedObject = $data->result;
 
-        return $savedObject->id ?? 0;
+        return $savedObject->id;
     }
 
-    public function updateAccount(array $array)
+    public function update(array $array)
     {
+        $array['assigned_user_id'] = $this->userId;
+
         $objectJson = json_encode($array);
 
         $params = array("sessionName" => $this->tokenSession, "operation" => 'update', "element" => $objectJson);
@@ -66,11 +68,10 @@ class PsyVtiger extends VtigerLogin
         $url = $this->urlBase . '/webservice.php';
 
         $retorno = ExecutaCURL::post($url, $params);
-
         $data = RetornoVtiger::valida($retorno);
 
         $updatedObject = $data->result;
 
-        return $updatedObject->id ?? 0;
+        return $updatedObject->id;
     }
 }
