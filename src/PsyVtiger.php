@@ -54,7 +54,7 @@ class PsyVtiger extends VtigerLogin
 
         $savedObject = $data->result;
 
-        return $savedObject->id;
+        return $savedObject;
     }
 
     public function update(array $array)
@@ -72,6 +72,6 @@ class PsyVtiger extends VtigerLogin
 
         $updatedObject = $data->result;
 
-        return $updatedObject->id;
+        return $updatedObject;
     }
 }

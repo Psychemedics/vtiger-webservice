@@ -1,6 +1,6 @@
 # Vtiger Webservice
 
-### versão _1.0_
+### versão _3.0_
 
 Pacote de comunicação com o webservice do Vtiger
 
@@ -35,7 +35,22 @@ public function getDados(Request $request)
 
     $vtiger = new PsyVtiger('https://meudominio.com', 'usuario', 'chave', 'id');
     $insertArray = [];
-    $account = $vtiger->createAccount($insertArray, 'moduleName');
+    $account = $vtiger->create($insertArray, 'moduleName');
+
+    ...
+} 
+```
+
+### Update Account:
+```
+use VtigerWS\PsyVtiger;
+
+public function getDados(Request $request)
+{
+
+    $vtiger = new PsyVtiger('https://meudominio.com', 'usuario', 'chave', 'id');
+    $updateArray = [];
+    $account = $vtiger->update($updateArray);
 
     ...
 } 

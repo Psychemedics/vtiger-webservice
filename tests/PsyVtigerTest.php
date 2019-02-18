@@ -53,8 +53,8 @@ class PsyVtigerTest extends TestCase
 
         $array = [];
 
-        $id = $classVtigerLogin->create($array, 'Accounts');
-        $this->assertTrue(!empty($id));
+        $account = $classVtigerLogin->create($array, 'Accounts');
+        $this->assertTrue(!empty($account->id));
     }
 
     public function testUpdateAccount()
@@ -70,7 +70,7 @@ class PsyVtigerTest extends TestCase
 
         $array = [];
 
-        $id = $classVtigerLogin->update($array);
-        $this->assertTrue(!empty($id));
+        $account = $classVtigerLogin->update($array);
+        $this->assertTrue(!empty($account->id));
     }
 }
