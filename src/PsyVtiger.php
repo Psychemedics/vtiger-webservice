@@ -6,7 +6,7 @@ namespace VtigerWS;
 class PsyVtiger extends VtigerLogin
 {
 
-    public function __construct(string $urlBase, string $usuario, string $key, string $idUsuario = "")
+    public function __construct(string $urlBase, string $usuario, string $key, string $idUsuario = null)
     {
 
         parent::__construct($urlBase, $usuario, $key, $idUsuario);
@@ -23,7 +23,7 @@ class PsyVtiger extends VtigerLogin
 
         $data = RetornoVtiger::valida($retorno);
 
-        return $data->result[0];
+        return $data->result;
     }
 
     public function getAccountByKeyValue($key, $value) {
@@ -36,10 +36,10 @@ class PsyVtiger extends VtigerLogin
 
         $data = RetornoVtiger::valida($retorno);
 
-        return $data->result[0];
+        return $data->result;
     }
 
-    public function createAccount(array $array, string $moduleName)
+    public function create(array $array, string $moduleName)
     {
         $array['assigned_user_id'] = $this->userId;
 
@@ -54,6 +54,24 @@ class PsyVtiger extends VtigerLogin
 
         $savedObject = $data->result;
 
-        return $savedObject->id;
+        return $savedObject;
+    }
+
+    public function update(array $array)
+    {
+        $array['assigned_user_id'] = $this->userId;
+
+        $objectJson = json_encode($array);
+
+        $params = array("sessionName" => $this->tokenSession, "operation" => 'update', "element" => $objectJson);
+
+        $url = $this->urlBase . '/webservice.php';
+
+        $retorno = ExecutaCURL::post($url, $params);
+        $data = RetornoVtiger::valida($retorno);
+
+        $updatedObject = $data->result;
+
+        return $updatedObject;
     }
 }

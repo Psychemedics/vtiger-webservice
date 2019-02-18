@@ -25,7 +25,7 @@ abstract class VtigerLogin
 
     private $key;
 
-    public function __construct(string $urlBase, string $usuario, string $key, string $idUsuario = "")
+    public function __construct(string $urlBase, string $usuario, string $key, string $idUsuario = null)
     {
 
         $this->urlBase = $urlBase;
