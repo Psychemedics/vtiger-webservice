@@ -74,4 +74,15 @@ class PsyVtiger extends VtigerLogin
 
         return $updatedObject;
     }
+
+    public function retrieve($id)
+    {
+        $url = $this->urlBase .'/webservice.php?operation=retrieve&sessionName=' . $this->tokenSession . '&id='.$id;
+
+        $retorno = ExecutaCURL::get($url);
+
+        $data = RetornoVtiger::valida($retorno);
+
+        return $data->result;
+    }
 }
