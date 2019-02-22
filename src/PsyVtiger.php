@@ -41,7 +41,7 @@ class PsyVtiger extends VtigerLogin
 
     public function create(array $array, string $moduleName)
     {
-        $array['assigned_user_id'] = $this->userId;
+        $array['assigned_user_id'] = $this->idUsuario;
 
         $objectJson = json_encode($array);
 
@@ -59,7 +59,7 @@ class PsyVtiger extends VtigerLogin
 
     public function update(array $array)
     {
-        $array['assigned_user_id'] = $this->userId;
+        $array['assigned_user_id'] =  $this->idUsuario;
 
         $objectJson = json_encode($array);
 

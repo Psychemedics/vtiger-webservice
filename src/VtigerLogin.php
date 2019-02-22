@@ -21,7 +21,7 @@ abstract class VtigerLogin
 
     private $usuario;
 
-    private $idUsuario;
+    protected $idUsuario;
 
     private $key;
 
